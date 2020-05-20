@@ -29,20 +29,20 @@ public class ZobrazenieRest {
 	@Autowired
 	BookRepository knihaRepo;
 	
-	// Find
+	// Find All
     @GetMapping("/books")
     List<Book> findAll() {
         return (List<Book>) knihaRepo.findAll();
     }
     
-    // Save
+    // Save all books from Json body
     @PostMapping("/books")
 	@ResponseStatus(HttpStatus.CREATED)
     Book newBook(@Valid @RequestBody Book newBook) {
         return knihaRepo.save(newBook);
     }
     
- // Find
+ // Find by ID
     @GetMapping("/books/{id}")
     Book findOne(@PathVariable @Min(1) Long id) {
         Optional<Book> vysledok = knihaRepo.findById(id);
@@ -63,7 +63,7 @@ public class ZobrazenieRest {
 //      
 //
 //    }
-
+// 	Delete by ID
     @DeleteMapping("/books/{id}")
     void deleteBook(@PathVariable Long id) {
     	knihaRepo.deleteById(id);
